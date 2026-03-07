@@ -12,17 +12,23 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
+    // Using Mock API to fetch data
+    // const data = await fetch(
+    //   "https://mocki.io/v1/c60e27f2-4a7f-4117-acd6-531988381e8f",
+    // );
+    
+    // Using Swiggy API to fetch real data
     const data = await fetch(
-      "https://mocki.io/v1/c60e27f2-4a7f-4117-acd6-531988381e8f",
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.8313693&lng=77.5873139&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
     setListOfRestaurants(
-      json.data.cards[0].card.card.gridElements.infoWithStyle.restaurants,
+      json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants,
     );
     setFilteredRestaurants(
-      json.data.cards[0].card.card.gridElements.infoWithStyle.restaurants,
+      json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants,
     );
-  };
+};
 
   // const fetchData = () => {
   //     fetch("https://mocki.io/v1/b6c07537-fb71-46c2-99fe-682a7530e15c")
@@ -36,7 +42,7 @@ const Body = () => {
   //       });
   // }
 
-  return listOfRestaurants.length === 0 ? (
+  return listOfRestaurants?.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="body">
@@ -64,16 +70,16 @@ const Body = () => {
           className="filter-btn"
           onClick={() => {
             const filteredList = listOfRestaurants.filter(
-              (restaurant) => restaurant.info.avgRating > 4,
+              (restaurant) => restaurant?.info?.avgRating > 4,
             );
-            setListOfRestaurants(filteredList);
+            setFilteredRestaurants(filteredList);
           }}
         >
           Top Rated Restaurant
         </button>
       </div>
       <div className="restaurant-container">
-        {filteredRestaurants.map((restaurant) => (
+        {filteredRestaurants?.map((restaurant) => (
           <RestaurantCard
             key={restaurant?.info?.id}
             restData={restaurant?.info}
