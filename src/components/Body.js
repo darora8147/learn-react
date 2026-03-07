@@ -1,6 +1,7 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -19,7 +20,7 @@ const Body = () => {
 
     // Using Swiggy API to fetch real data
     const data = await fetch(
-        "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.8313693&lng=77.5873139&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.8313693&lng=77.5873139&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
     );
     const json = await data.json();
     setListOfRestaurants(
@@ -28,7 +29,7 @@ const Body = () => {
     setFilteredRestaurants(
       json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants,
     );
-};
+  };
 
   // const fetchData = () => {
   //     fetch("https://mocki.io/v1/b6c07537-fb71-46c2-99fe-682a7530e15c")
@@ -58,8 +59,10 @@ const Body = () => {
         <button
           className="search-btn"
           onClick={() => {
-            const filteredList = listOfRestaurants.filter(
-              (restaurant) => restaurant.info.name.toLowerCase().includes(searchText.toLowerCase()),
+            const filteredList = listOfRestaurants.filter((restaurant) =>
+              restaurant.info.name
+                .toLowerCase()
+                .includes(searchText.toLowerCase()),
             );
             setFilteredRestaurants(filteredList);
           }}
@@ -80,10 +83,12 @@ const Body = () => {
       </div>
       <div className="restaurant-container">
         {filteredRestaurants?.map((restaurant) => (
-          <RestaurantCard
+          <Link
             key={restaurant?.info?.id}
-            restData={restaurant?.info}
-          />
+            to={"/restaurant/" + restaurant?.info?.id}
+          >
+            <RestaurantCard restData={restaurant?.info} />
+          </Link>
         ))}
       </div>
     </div>
