@@ -26,6 +26,7 @@
 .restaurant-card{
     padding: 5px;
     width: 200px;
+    height: 500px;
 }
 
 .restaurant-container{
@@ -52,4 +53,33 @@
     background-color: black;
     color: white;
     cursor: pointer;
+}
+
+.shimmer-container {
+    display: flex;
+    padding: 50px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.shimmer-card {
+    width: 200px;
+    height: 500px;
+    background-color: #f0f0f0;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-btn{
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.login-btn:hover{
+    background-color: black;
+    color: white;
+}
+.search-btn{
+    margin: 10px;
 }
