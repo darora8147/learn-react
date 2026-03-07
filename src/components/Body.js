@@ -16,10 +16,10 @@ const Body = () => {
     // const data = await fetch(
     //   "https://mocki.io/v1/c60e27f2-4a7f-4117-acd6-531988381e8f",
     // );
-    
+
     // Using Swiggy API to fetch real data
     const data = await fetch(
-        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.8313693&lng=77.5873139&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+        "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.8313693&lng=77.5873139&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
     setListOfRestaurants(
