@@ -90,6 +90,44 @@
   color: inherit;
 }
 
+/* Online/Offline Status Styles */
+.online {
+  color: green;
+  font-weight: bold;
+  position: relative;
+}
+
+.online::before {
+  content: '';
+  position: absolute;
+  left: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background-color: green;
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(0, 255, 0, 0.5);
+}
+
+.offline {
+  color: red;
+  font-weight: bold;
+  position: relative;
+}
+
+.offline::before {
+  content: '';
+  position: absolute;
+  left: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background-color: red;
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(255, 0, 0, 0.5);
+}
 .user-card {
     display: flex;
     flex-direction: column;
