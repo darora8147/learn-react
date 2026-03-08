@@ -24,10 +24,10 @@ const Body = () => {
     );
     const json = await data.json();
     setListOfRestaurants(
-      json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants,
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants,
     );
     setFilteredRestaurants(
-      json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants,
+      json.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants,
     );
   };
 
@@ -86,6 +86,7 @@ const Body = () => {
           <Link
             key={restaurant?.info?.id}
             to={"/restaurant/" + restaurant?.info?.id}
+            className="restaurant-link"
           >
             <RestaurantCard restData={restaurant?.info} />
           </Link>

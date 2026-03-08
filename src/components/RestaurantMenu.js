@@ -5,7 +5,6 @@ import {useParams} from "react-router";
 const RestaurantMenu = () => {
   const [restInfo, setRestInfo] = useState(null);
   const { restId } = useParams();
-  console.log('restId', restId)
 
   useEffect(() => {
     fetchMenu();
@@ -13,8 +12,17 @@ const RestaurantMenu = () => {
 
   const fetchMenu = async () => {
     const data = await fetch(
-      "https://mocki.io/v1/5d696c8c-e476-4d82-a917-453188d6f251",
+      "https://mocki.io/v1/2682e7ac-76e6-4079-a279-4b851196b9f4",
     );
+    // const data = await fetch("https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.8313693&lng=77.5873139&restaurantId=475418", {
+    //     method: "GET",
+    //     headers: {
+    //         "User-Agent": "Mozilla/5.0",
+    //         "Accept": "application/json",
+    //         "Referer": "https://www.swiggy.com/",
+    //         "Origin": "https://www.swiggy.com"
+    //     }
+    //     });
 
     const json = await data.json();
     setRestInfo(json);
@@ -25,7 +33,7 @@ const RestaurantMenu = () => {
   }
 
   const { name, cuisines, costForTwoMessage } = restInfo?.data?.cards[2]?.card?.card?.info;
-  const { itemCards } = restInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2].card.card;
+  const { itemCards } = restInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[3].card.card;
 
   return (
     <div className="restaurant-menu">
