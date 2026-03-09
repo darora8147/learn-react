@@ -27,15 +27,15 @@ class UserClass extends React.Component {
     componentWillUnmount() {
         console.log(this.props.name + " Component Will Unmount Called");
     }
-    
+
     render() {
         console.log(this.props.name + " Render Called");
         const { name , location, avatar_url, company } = this.state.userInfo;
         return (
-            <div className="user-card">
-            <img className="user-avatar" src={avatar_url} alt={name} />
-            <h2>{name}</h2>
-            <p>{company} - {location}</p>
+            <div className="center p-4 m-4 bg-gray-100 rounded-lg shadow-md">
+            <img className="w-32 h-32 rounded-full" src={avatar_url} alt={name} />
+            <h2 className="text-lg font-bold">{name}</h2>
+            <p className="font-light">{company} - {location}</p>
         </div>
         )
     }

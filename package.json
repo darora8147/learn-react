@@ -18,9 +18,14 @@
   },
   "homepage": "https://github.com/darora8147/learn-react#readme",
   "devDependencies": {
-    "parcel": "^2.16.4"
+    "init": "^0.1.2",
+    "npx": "^10.2.2",
+    "parcel": "^2.16.4",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^3.4.19"
   },
   "dependencies": {
+    "@tailwindcss/postcss": "^4.2.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-router": "^7.13.1",
