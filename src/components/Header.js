@@ -3,12 +3,14 @@ import { LOGO_CDN_URL } from "../utils/constant";
 import { Link } from "react-router";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
   const onlineStatus = useOnlineStatus();
   const {loggedInUserDetails} = useContext(UserContext);
-  console.log('loggedInUserDetails', loggedInUserDetails)
+  
+  const cartItems = useSelector((store) => store.cart.items);
 
   return (
     <div className="flex flex-col md:flex-row justify-between bg-pink-100 m-2 h-auto md:h-36 shadow-lg sm:bg-yellow-100 lg:bg-green-100">
@@ -28,19 +30,20 @@ const Header = () => {
             {onlineStatus ? "Online" : "Offline"}
             </span>
           </li>  
-          <li className="px-4 md:px-8 text-center"> <Link to="/"> Home </Link></li>
-          <li className="px-4 md:px-8 text-center"> <Link to="/about">About Us</Link></li>
-          <li className="px-4 md:px-8 text-center"> <Link to="/contact">Contact Us</Link></li>
-          <li className="px-4 md:px-8 text-center"> <Link to="/grocery">Grocery</Link></li>
+          <li className="p-2 m-2"> <Link to="/"> Home </Link></li>
+          <li className="p-2 m-2"> <Link to="/about">About Us</Link></li>
+          <li className="p-2 m-2"> <Link to="/contact">Contact Us</Link></li>
+          <li className="p-2 m-2"> <Link to="/grocery">Grocery</Link></li>
+          <li className="p-2 m-2 font-bold"> <Link to="/cart">Cart Items({cartItems.length})</Link></li>
           
-          <li className="px-4 md:px-8 flex justify-center">
-            <button className="px-4 bg-blue-500 h-10 text-white rounded-md" onClick={() => {
+          <li className="px-2 md:px-2 flex justify-center">
+            <button className="px-2 bg-blue-500 h-10 text-white rounded-md" onClick={() => {
               setBtnName(btnName === "Login" ? "Logout" : "Login");
             }}>
               {btnName}
             </button>
           </li>
-          <li className="px-4 md:px-8 text-center">
+          <li className="px-4 md:px-4 text-center">
             <span className="font-semibold">{loggedInUserDetails?.name}</span>
             <p className="text-sm text-gray-600">{loggedInUserDetails?.email}</p>
           </li>

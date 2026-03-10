@@ -10,8 +10,13 @@ import { lazy, useEffect, useState } from "react";
 import { Suspense } from "react";
 // import Grocery from "./components/Grocery";
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+// import Cart from "./components/Cart";
 
+//Lazy Loading Grocery and Cart Component
 const Grocery = lazy(() => import("./components/Grocery"));
+const Cart = lazy(() => import("./components/Cart"));
 
 const AppLayout = () => {
   const [userInfo, setUserInfo] = useState();
@@ -27,13 +32,16 @@ const AppLayout = () => {
   }, []);
 
   return (
-    <div className="app">
-      <UserContext.Provider value={{ loggedInUserDetails: userInfo, setUserInfo }}>
-        <Header />
-        <Outlet />
-    </UserContext.Provider>
-
-    </div>
+    <Provider store={appStore}>
+      <div className="app">
+        <UserContext.Provider
+          value={{ loggedInUserDetails: userInfo, setUserInfo }}
+        >
+          <Header />
+          <Outlet />
+        </UserContext.Provider>
+      </div>
+    </Provider>
   );
 };
 
@@ -59,6 +67,14 @@ const appRouter = createBrowserRouter([
         element: (
           <Suspense fallback={<h1>Loading...</h1>}>
             <Grocery />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/cart",
+        element: (
+          <Suspense fallback={<h1>Loading Cart Page...</h1>}>
+            <Cart />
           </Suspense>
         ),
       },
