@@ -12,7 +12,7 @@ class UserClass extends React.Component {
         }
         console.log(this.props.name + " Constructor Called");
     }
-
+    
     async componentDidMount() {
         console.log(this.props.name + " Component Did Mount Called");
         const data = await fetch("https://api.github.com/users/akshaymarch7");
@@ -35,7 +35,7 @@ class UserClass extends React.Component {
             <div className="center p-4 m-4 bg-gray-100 rounded-lg shadow-md">
             <img className="w-32 h-32 rounded-full" src={avatar_url} alt={name} />
             <h2 className="text-lg font-bold">{name}</h2>
-            <p className="font-light">{company} - {location}</p>
+            <p className="font-extralight">{company} - {location}</p>
         </div>
         )
     }

@@ -1,13 +1,20 @@
-import RestaurantCard from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
+import { useContext, useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+
+  //Below is the concept of High Order Components --
+  // where we pass a component, update it and return the updated component
+  const RestaurantPromoted = withPromotedLabel(RestaurantCard);
+
+  const { loggedInUserDetails, setUserInfo } = useContext(UserContext);
 
   useEffect(() => {
     fetchData();
@@ -25,10 +32,11 @@ const Body = () => {
     );
     const json = await data.json();
     setListOfRestaurants(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants,
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants,
     );
     setFilteredRestaurants(
-      json.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants,
+      json.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants,
     );
   };
 
@@ -91,6 +99,18 @@ const Body = () => {
         >
           Top Rated Restaurant
         </button>
+        User Name:
+        <input
+          className="border border-gray-300 p-4 h-10 rounded-md"
+          type="text"
+          value={loggedInUserDetails?.name || ""}
+          onChange={(e) => {
+            setUserInfo(prev => ({
+              ...prev,
+              name: e.target.value
+            }));
+          }}
+        ></input>
       </div>
       <div className="flex flex-wrap">
         {filteredRestaurants?.map((restaurant) => (

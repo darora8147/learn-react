@@ -6,17 +6,33 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
-import { lazy } from "react";
+import { lazy, useEffect, useState } from "react";
 import { Suspense } from "react";
 // import Grocery from "./components/Grocery";
+import UserContext from "./utils/UserContext";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 
 const AppLayout = () => {
+  const [userInfo, setUserInfo] = useState();
+
+  // For Authentication
+  useEffect(() => {
+    //Make some api call to fetch user details, below is static data
+    const userDetails = {
+      name: "Divyam Arora",
+      email: "divyamarora95@gmail.com",
+    };
+    setUserInfo(userDetails);
+  }, []);
+
   return (
     <div className="app">
-      <Header />
-      <Outlet />
+      <UserContext.Provider value={{ loggedInUserDetails: userInfo, setUserInfo }}>
+        <Header />
+        <Outlet />
+    </UserContext.Provider>
+
     </div>
   );
 };
@@ -49,7 +65,7 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurant/:restId",
         element: <RestaurantMenu />,
-      }
+      },
     ],
     errorElement: <Error />,
   },
