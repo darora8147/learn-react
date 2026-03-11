@@ -5,7 +5,8 @@
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html",
-    "test": "jest"
+    "test": "jest",
+    "watch-test": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,15 @@
   },
   "homepage": "https://github.com/darora8147/learn-react#readme",
   "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.0",
+    "@babel/preset-react": "^7.28.5",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "babel-jest": "^30.3.0",
     "init": "^0.1.2",
+    "jest": "^30.3.0",
+    "jest-environment-jsdom": "^30.3.0",
     "npx": "^10.2.2",
     "parcel": "^2.16.4",
     "postcss": "^8.5.8",
@@ -33,7 +42,7 @@
     "react-router": "^7.13.1",
     "react-router-dom": "^7.13.1"
   },
-  "browserlist": [
+  "browserslist": [
     "last 2 versions"
   ]
 }

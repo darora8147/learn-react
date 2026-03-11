@@ -16,6 +16,7 @@ const handleAddItem = (item) => {
       {items.map((item) => {
         return (
           <div
+            data-testid="itemList"
             key={item.card.info.id}
             className="p-2 m-2 text-left border-gray-200 border-b-2 flex justify-between"
           >

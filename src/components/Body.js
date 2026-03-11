@@ -32,15 +32,15 @@ const Body = () => {
     );
     const json = await data.json();
     setListOfRestaurants(
-      json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants,
     );
     setFilteredRestaurants(
-      json.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.restaurants,
+      json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants,
     );
   };
 
-  // const fetchData = () => {
+  // const fetchData =2() => {
   //     fetch("https://mocki.io/v1/b6c07537-fb71-46c2-99fe-682a7530e15c")
   //       .then((response) => response.json())
   //       .then((data) => {
@@ -68,6 +68,7 @@ const Body = () => {
       <div className="p-4 m-4">
         <input
           className="border border-gray-300 h-10 rounded-md"
+          data-testid="searchInput"
           type="text"
           placeholder=" Search for restaurants..."
           value={searchText}
